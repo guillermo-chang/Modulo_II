@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.init.escuela.entity.participante;
+
 import mx.init.escuela.entity.turma;
 import mx.init.escuela.DAO.turmaDAO;
 
@@ -41,7 +41,29 @@ public class turmaRest {
 			return ResponseEntity.notFound().build();
 		}		
 	}
+	
+	@PostMapping
+	public ResponseEntity<turma> postTurma(@RequestBody turma turma){
+		turma newturma = TurmaDAO.save(turma);
+		return ResponseEntity.ok(newturma);		
+	}
+	
+	@DeleteMapping(value="{turmaId}")
+	public ResponseEntity<Void> deleteTurma(@PathVariable("turmaId") Integer turmaId){
+		Optional<turma> optionalturma = TurmaDAO.findById(turmaId);
+		
+		if (optionalturma.isPresent()) {
+			TurmaDAO.deleteById(turmaId);
+			return ResponseEntity.ok(null);			
+		}else {
+			return ResponseEntity.notFound().build();
+		}		
+	}
 
+	
+	
+	
+	
 	
 	
 }
