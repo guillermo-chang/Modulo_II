@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import mx.init.escuela.entity.turma;
 import mx.init.escuela.entity.turma;
 import mx.init.escuela.DAO.turmaDAO;
 
@@ -60,7 +60,19 @@ public class turmaRest {
 		}		
 	}
 
-	
+	@PutMapping
+	public ResponseEntity<turma> putTurma(@RequestBody turma turma){
+		Optional<turma> optionalturma =TurmaDAO.findById(turma.getIdTurma());
+		
+		if (optionalturma.isPresent()) {
+			turma updateturma = optionalturma.get();
+			updateturma.setDescripcion(turma.getDescripcion());
+			TurmaDAO.save(updateturma);
+			return ResponseEntity.ok(updateturma);
+		}else {
+			return ResponseEntity.notFound().build();
+		}		
+	}
 	
 	
 	
