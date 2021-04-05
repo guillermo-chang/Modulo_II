@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.init.escuela.entity.turma;
-import mx.init.escuela.entity.turma;
 import mx.init.escuela.DAO.turmaDAO;
 
 @RestController
