@@ -67,6 +67,8 @@ public class turmaRest {
 		if (optionalturma.isPresent()) {
 			turma updateturma = optionalturma.get();
 			updateturma.setDescripcion(turma.getDescripcion());
+			updateturma.setTipo(turma.getTipo());
+			updateturma.setFkidParticipante(turma.getFkidParticipante());		
 			TurmaDAO.save(updateturma);
 			return ResponseEntity.ok(updateturma);
 		}else {
