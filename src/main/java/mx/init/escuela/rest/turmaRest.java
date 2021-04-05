@@ -31,5 +31,17 @@ public class turmaRest {
 		return ResponseEntity.ok(turma);
 	}
 	
+	@RequestMapping(value="{turmaId}") ///api/turma/{turmaID}
+	public ResponseEntity<turma> getByIdTurma(@PathVariable("turmaId") Integer turmaId){
+		Optional<turma> optionalturma = TurmaDAO.findById(turmaId);
+		
+		if (optionalturma.isPresent()) {
+			return ResponseEntity.ok(optionalturma.get());
+		}else {
+			return ResponseEntity.notFound().build();
+		}		
+	}
+
+	
 	
 }
